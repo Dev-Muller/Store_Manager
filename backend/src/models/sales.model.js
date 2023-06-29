@@ -2,7 +2,8 @@ const { connection } = require('./connection');
 
 const findAllSales = async () => {
   const [sales] = await connection.execute(
-    `SELECT sales.id, sales.date, product.product_id AS productId, product.quantity
+    `SELECT sales.id AS saleId,
+    sales.date AS date, product.product_id AS productId, product.quantity AS quantity
     FROM StoreManager.sales AS sales
     join StoreManager.sales_products AS product ON sales.id = product.sale_id
     ORDER BY sales.id, productId`,

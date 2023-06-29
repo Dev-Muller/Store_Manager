@@ -24,7 +24,7 @@ describe('Realizando testes - saleService', function () {
     expect(sales).to.have.all.keys('date', 'id', 'productId', 'quantity');
   });
   it('Deve retornar uma mensagem de erro', async function () {
-    sinon.stub(salesModel, 'findSalesById').resolves(null);
+    sinon.stub(salesModel, 'findSalesById').resolves([]);
 
     const sales = await saleService.findSalesById(1);
 
