@@ -9,8 +9,7 @@ const productFromDB = [{
   {
     id: 3,
     name: 'Escudo do CapitÃ£o AmÃ©rica',
-  }];
+  },
+];
 
-module.exports = {
-  productFromDB,
-};
+module.exports = productFromDB;
