@@ -19,7 +19,7 @@ const findById = async (req, res) => {
 };
 
 const createNewProduct = async (req, res) => {
-  const name = req.body;
+  const { name } = req.body;
 
   const data = await productService.createNewProduct(name);
 
