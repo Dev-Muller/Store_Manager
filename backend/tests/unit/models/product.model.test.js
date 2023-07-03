@@ -9,18 +9,26 @@ describe('Realizando testes - productModel', function () {
     sinon.restore();
   });
   it('Deve retornar todos os objetos com a chave "data" e o valor "product"', async function () {
-    sinon.stub(connection, 'query').resolves(productFromDB);
+    sinon.stub(connection, 'execute').resolves(productFromDB);
     
     const product = await productModel.findAll();
 
-    expect(product).to.be.an('array');
+    expect(product).to.be.an('object');
   });
   it('Deve retornar um objeto com a chave "data" e o valor "product"', async function () {
-    sinon.stub(connection, 'query').resolves(productFromDB[0]);
+    sinon.stub(connection, 'execute').resolves([[productFromDB[0]]]);
 
     const product = await productModel.findById(1);
     
     expect(product).to.be.an('object');
     expect(product).to.have.all.keys('id', 'name');
+  });
+
+  it('Deve retornar um objeto com a chave "insertId"', async function () {
+    sinon.stub(connection, 'execute').resolves([{ insertId: 4 }]);
+
+    const product = await productModel.createNewProduct('ProdutoX');
+
+    expect(product).to.be.an('number');
   });
 });

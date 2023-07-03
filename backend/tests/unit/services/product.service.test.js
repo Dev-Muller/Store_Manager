@@ -31,4 +31,16 @@ describe('Realizando testes - productService', function () {
     expect(product).to.be.an('object');
     expect(product).to.have.all.keys('message');
   });
+
+  it('Deve retornar um objeto com o id e nome do produto criado', async function () {
+    sinon.stub(productModel, 'createNewProduct').resolves(4);
+    sinon.stub(productModel, 'findById').resolves({ id: 4, name: 'ProdutoX' });
+
+    const product = await productService.createNewProduct('ProdutoX');
+
+    expect(product).to.be.an('object');
+    expect(product).to.have.all.keys('id', 'name');
+    expect(product.id).to.be.equal(4);
+    expect(product.name).to.be.equal('ProdutoX');
+  });
 });

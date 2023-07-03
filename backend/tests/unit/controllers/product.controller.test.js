@@ -51,6 +51,22 @@ describe('Realizando testes - ProductController', function () {
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith({ message: 'Produto não encontrado' });
   });
+
+  it('Deve retornar um objeto com o id e nome do produto criado', async function () {
+    sinon.stub(productService, 'createNewProduct').resolves({ id: 4, name: 'ProdutoX' });
+
+    const req = {};
+    const res = {};
+
+    req.body = { name: 'ProdutoX' };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns(res);
+
+    await productController.createNewProduct(req, res);
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith({ id: 4, name: 'ProdutoX' });
+  });
   
   afterEach(function () {
     sinon.restore();
