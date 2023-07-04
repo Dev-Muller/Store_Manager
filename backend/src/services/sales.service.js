@@ -1,4 +1,5 @@
 const { salesModel } = require('../models');
+const { getSaleId } = require('../models/sales.model');
 
 const findAllSales = async () => {
   const sales = await salesModel.findAllSales();
@@ -11,4 +12,13 @@ const findSalesById = async (salesId) => {
   return sales;
 };
 
-module.exports = { findAllSales, findSalesById };
+const createNewSale = async (saleDataObject) => {
+  const saleId = await getSaleId();
+  saleDataObject.map(async (sale) => {
+    await salesModel.createNewSale(saleId, sale.productId, sale.quantity);
+  }); 
+  
+  return { id: saleId, itemsSold: saleDataObject };
+};
+
+module.exports = { findAllSales, findSalesById, createNewSale };

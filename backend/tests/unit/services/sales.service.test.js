@@ -31,4 +31,12 @@ describe('Realizando testes - saleService', function () {
     expect(sales).to.be.an('object');
     expect(sales).to.have.all.keys('message');
   });
+  it('retorna uma nova sale', async function () {
+    sinon.stub(salesModel, 'createNewSale').resolves({ id: 1, productId: 1, quantity: 1 });
+
+    const sale = await saleService.createNewSale([{ productId: 1, quantity: 1 }]);
+
+    expect(sale).to.be.an('object');
+    expect(sale).to.have.all.keys('id', 'itemsSold');
+  });
 });

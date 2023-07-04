@@ -23,4 +23,14 @@ describe('Realizando testes - salesModel', function () {
     expect(sales).to.be.an('array');
     expect(sales[0]).to.have.all.keys('date', 'productId', 'quantity');
   });
+  it('testa a criação de uma nova sale', async function () {
+    sinon.stub(connection, 'execute').resolves([{
+      insertId: 1,
+    }]);
+
+    const sale = await salesModel.createNewSale({ productId: 1, quantity: 1 });
+
+    expect(sale).to.be.an('object');
+    expect(sale).to.have.all.keys('id', 'productId', 'quantity');
+  });
 });

@@ -18,7 +18,7 @@ const createNewProduct = async (productDataObject) => {
     'INSERT INTO products (name) VALUES (?)',
     [name],
   );
-  console.log(product);
+
   return { id: product.insertId, name };
 };
 
