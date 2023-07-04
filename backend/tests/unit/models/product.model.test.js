@@ -29,6 +29,6 @@ describe('Realizando testes - productModel', function () {
 
     const product = await productModel.createNewProduct('ProdutoX');
 
-    expect(product).to.be.an('number');
+    expect(product).to.be.an('object');
   });
 });

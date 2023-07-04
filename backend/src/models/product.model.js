@@ -18,8 +18,8 @@ const createNewProduct = async (productDataObject) => {
     'INSERT INTO products (name) VALUES (?)',
     [name],
   );
-  
-  return product.insertId;
+  console.log(product);
+  return { id: product.insertId, name };
 };
 
 module.exports = { findAll, findById, createNewProduct };

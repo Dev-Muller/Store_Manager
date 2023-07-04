@@ -18,8 +18,9 @@ const createNewProduct = async (productDataObject) => {
   const name = productDataObject;
 
   const newProductId = await productModel.createNewProduct(name);
-  const newProduct = await productModel.findById(newProductId);
-  return newProduct;
+  console.log(newProductId);
+  // const newProduct = await productModel.findById(newProductId);
+  return newProductId;
 };
 
 module.exports = { findAll, findById, createNewProduct };
