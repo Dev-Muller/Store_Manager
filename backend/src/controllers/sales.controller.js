@@ -22,7 +22,6 @@ const createNewSale = async (req, res) => {
   const { body } = req;
   
   const data = await saleService.createNewSale(body);
-  console.log(data);
 
   return res.status(201).json(data);
 };

@@ -26,7 +26,6 @@ const createNewSale = async (saleId, productId, quantity) => {
     [saleId, productId, quantity],
   );
 
-  console.log(sale);
   return { id: sale.insertId, productId, quantity };
 };
 
