@@ -31,4 +31,12 @@ describe('Realizando testes - productModel', function () {
 
     expect(product).to.be.an('object');
   });
+
+  it('deve retornar um array de objeto com o objeto atualizado', async function () {
+    sinon.stub(connection, 'execute').resolves([productFromDB[0]]);
+
+    const product = await productModel.updateProduct(1, 'ProdutoX');
+    
+    expect(product).to.be.an('object');
+  });
 });

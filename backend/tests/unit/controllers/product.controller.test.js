@@ -67,6 +67,23 @@ describe('Realizando testes - ProductController', function () {
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith({ id: 4, name: 'ProdutoX' });
   });
+  it('deve retornar um array de objeto com o objeto atualizado', async function () {
+    const [{ id }] = productFromDB;
+    sinon.stub(productService, 'updateProduct').resolves({ status: 200, data: { id: +id, name: 'ProdutoX' } });
+
+    const req = {};
+    const res = {};
+
+    req.body = { name: 'ProdutoX' };
+    req.params = { id: 1 };
+
+    res.status = sinon.stub().returnsThis();
+    res.json = sinon.stub().returnsThis();
+
+    await productController.updateProduct(req, res);
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith({ id: 1, name: 'ProdutoX' });
+  });
   
   afterEach(function () {
     sinon.restore();

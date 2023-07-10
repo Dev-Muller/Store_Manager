@@ -39,8 +39,13 @@ describe('Realizando testes - productService', function () {
     const product = await productService.createNewProduct('ProdutoX');
 
     expect(product).to.be.an('number');
-    // expect(product).to.have.all.keys('id', 'name');
-    // expect(product.id).to.be.equal(4);
-    // expect(product.name).to.be.equal('ProdutoX');
+  });
+
+  it('deve retornar um array de objeto com o objeto atualizado', async function () {
+    sinon.stub(productModel, 'updateProduct').resolves([productFromModel[0]]);
+
+    const product = await productService.updateProduct(1, 'ProdutoX');
+    
+    expect(product).to.be.an('object');
   });
 });

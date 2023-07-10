@@ -5,5 +5,6 @@ const { productValidation, minValidName } = require('../middlewares/productValid
 route.get('/', productController.findAll);
 route.get('/:id', productController.findById);
 route.post('/', productValidation, minValidName, productController.createNewProduct);
+route.put('/:id', productValidation, minValidName, productController.updateProduct);
 
 module.exports = route;

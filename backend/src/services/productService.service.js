@@ -18,8 +18,24 @@ const createNewProduct = async (productDataObject) => {
   const name = productDataObject;
 
   const newProductId = await productModel.createNewProduct(name);
-  // const newProduct = await productModel.findById(newProductId);
   return newProductId;
 };
 
-module.exports = { findAll, findById, createNewProduct };
+const updateProduct = async (id, name) => {
+  const findId = await productModel.findById(id);
+
+  if (!findId) {
+    return {
+      status: 404,
+      data: {
+        message: 'Product not found',
+      },
+    };
+  }
+
+  await productModel.updateProduct(id, name);
+
+  return { status: 200, data: { id: +id, name } };
+};
+
+module.exports = { findAll, findById, createNewProduct, updateProduct };

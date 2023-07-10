@@ -22,4 +22,12 @@ const createNewProduct = async (productDataObject) => {
   return { id: product.insertId, name };
 };
 
-module.exports = { findAll, findById, createNewProduct };
+const updateProduct = async (id, name) => {
+  const [product] = await connection.execute(
+    'UPDATE products SET name = ? WHERE id = ?',
+    [name, id],
+    );
+  return product;
+};
+
+module.exports = { findAll, findById, createNewProduct, updateProduct };
