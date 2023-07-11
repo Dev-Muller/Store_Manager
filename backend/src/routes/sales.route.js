@@ -13,5 +13,6 @@ quantityRequired,
 validQuantity,
 salesController.createNewSale,
 );
+route.delete('/:id', salesController.deleteSale);
 
 module.exports = route;

@@ -33,4 +33,13 @@ describe('Realizando testes - salesModel', function () {
     expect(sale).to.be.an('object');
     expect(sale).to.have.all.keys('id', 'productId', 'quantity');
   });
+
+  it('testa deletar uma sale', async function () {
+    const data = sinon.stub(connection, 'execute').resolves();
+
+    await salesModel.deleteSale(1);
+
+    expect(data).to.have.been.calledWith('DELETE FROM sales WHERE id = ?', [1]);
+    expect(data).to.have.been.calledWith();
+  });
 });

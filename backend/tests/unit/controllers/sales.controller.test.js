@@ -66,6 +66,21 @@ describe('Realizando testes - salesController', function () {
     expect(res.json).to.have.been.calledWith({ id: 1, productId: 1, quantity: 1 });
   });
   
+  it('testa o controller de delete sale', async function () {
+    sinon.stub(saleService, 'deleteSale').resolves({ status: 204, data: {} });
+
+    const req = {};
+    const res = {};
+
+    req.params = { id: 1 };
+
+    res.status = sinon.stub().returnsThis();
+    res.json = sinon.stub().returnsThis();
+
+    await salesController.deleteSale(req, res);
+    expect(res.status).to.have.been.calledWith(204);
+  });
+  
   afterEach(function () {
     sinon.restore();
   });

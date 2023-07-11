@@ -39,4 +39,20 @@ describe('Realizando testes - saleService', function () {
     expect(sale).to.be.an('object');
     expect(sale).to.have.all.keys('id', 'itemsSold');
   });
+
+  it('testa a regra de negocio do delete sale', async function () {
+    sinon.stub(salesModel, 'findSalesById').resolves([]);
+
+    const data = await saleService.deleteSale(69);
+
+    expect(data.status).to.be.equal(404);
+  });
+
+  it('testa se uma sale foi deletada', async function () {
+    sinon.stub(salesModel, 'deleteSale').resolves();
+
+    const data = await saleService.deleteSale(1);
+
+    expect(data.status).to.be.equal(204);
+  });
 });
