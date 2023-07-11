@@ -84,6 +84,21 @@ describe('Realizando testes - ProductController', function () {
     expect(res.status).to.have.been.calledWith(200);
     expect(res.json).to.have.been.calledWith({ id: 1, name: 'ProdutoX' });
   });
+
+  it('testa o controller de deletar um produto', async function () {
+    sinon.stub(productService, 'deleteProduct').resolves({ status: 204, data: {} });
+
+    const req = {};
+    const res = {};
+
+    req.params = { id: 1 };
+
+    res.status = sinon.stub().returnsThis();
+    res.json = sinon.stub().returnsThis();
+
+    await productController.deleteProduct(req, res);
+    expect(res.status).to.have.been.calledWith(204);
+  });
   
   afterEach(function () {
     sinon.restore();

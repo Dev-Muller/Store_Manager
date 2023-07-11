@@ -48,4 +48,20 @@ describe('Realizando testes - productService', function () {
     
     expect(product).to.be.an('object');
   });
+
+  it('deve testar a regra de negocio do delete', async function () {
+    sinon.stub(productModel, 'findById').resolves(undefined);
+
+    const data = await productService.deleteProduct(9);
+
+    expect(data.status).to.be.equal(404);
+  });
+
+  it('deve testar a regra de negocio para deletar um produto', async function () {
+    sinon.stub(productModel, 'deleteProduct').resolves();
+
+    const data = await productService.deleteProduct(1);
+
+    expect(data.status).to.be.equal(204);
+  });
 });

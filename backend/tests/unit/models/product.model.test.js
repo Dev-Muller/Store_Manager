@@ -39,4 +39,14 @@ describe('Realizando testes - productModel', function () {
     
     expect(product).to.be.an('object');
   });
+
+  it('deve testar se foi deletado um produto do banco de dados', async function () {
+    const data = sinon.stub(connection, 'execute').resolves();
+
+    const id = 1;
+    await productModel.deleteProduct(id);
+
+    expect(data).to.have.been.calledWith('DELETE FROM products WHERE id = ?', [id]);
+    expect(data).to.have.been.calledWith();
+  });
 });
