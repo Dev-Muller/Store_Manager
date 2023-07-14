@@ -43,4 +43,11 @@ const deleteSale = async (id) => {
   );
 };
 
-module.exports = { findAllSales, findSalesById, createNewSale, getSaleId, deleteSale };
+const updateSale = async (id, productId, quantity) => {
+  await connection.execute(
+    'UPDATE sales_products SET quantity = ? WHERE sale_id = ? AND product_id = ?',
+    [quantity, id, productId],
+  );
+};
+
+module.exports = { findAllSales, findSalesById, createNewSale, getSaleId, deleteSale, updateSale };

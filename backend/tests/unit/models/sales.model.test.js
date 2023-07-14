@@ -42,4 +42,12 @@ describe('Realizando testes - salesModel', function () {
     expect(data).to.have.been.calledWith('DELETE FROM sales WHERE id = ?', [1]);
     expect(data).to.have.been.calledWith();
   });
+
+  it('testa atualizar uma sale', async function () {
+    const data = sinon.stub(connection, 'execute').resolves();
+
+    await salesModel.updateSale(1, 1, 1);
+
+    expect(data).to.have.been.calledWith('UPDATE sales_products SET quantity = ? WHERE sale_id = ? AND product_id = ?', [1, 1, 1]);
+  });
 });

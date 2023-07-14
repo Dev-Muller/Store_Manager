@@ -80,6 +80,27 @@ describe('Realizando testes - salesController', function () {
     await salesController.deleteSale(req, res);
     expect(res.status).to.have.been.calledWith(204);
   });
+  it('testa o controller de update sale', async function () {
+    sinon.stub(saleService, 'updateSale').resolves({ status: 200,
+    data: {
+      date: '2023-07-11T16:29:44.000Z',
+      productId: '1',
+      quantity: 20,
+      saleId: '1',
+    } });
+
+    const req = {};
+    const res = {};
+
+    req.params = { saleId: 1, productId: 1 };
+    req.body = { quantity: 20 };
+
+    res.status = sinon.stub().returnsThis();
+    res.json = sinon.stub().returnsThis();
+
+    await salesController.updateSale(req, res);
+    expect(res.status).to.have.been.calledWith(200);
+  });
   
   afterEach(function () {
     sinon.restore();

@@ -55,4 +55,20 @@ describe('Realizando testes - saleService', function () {
 
     expect(data.status).to.be.equal(204);
   });
+
+  it('testa o update sale para uma sale que nao existe', async function () {
+    sinon.stub(salesModel, 'updateSale').resolves([]);
+
+    const data = await saleService.updateSale(69, 1, 1);
+
+    expect(data.status).to.be.equal(404);
+  });
+
+  it('testa a regra de negocio do update sale', async function () {
+    sinon.stub(salesModel, 'updateSale').resolves([]);
+
+    const data = await saleService.updateSale(1, 1, 1);
+
+    expect(data.status).to.be.equal(200);
+  });
 });

@@ -5,7 +5,6 @@ const sinonChai = require('sinon-chai');
 const { expect } = chai;
 chai.use(sinonChai);
 
-// const salesFromDB = require('../unit/mocks/sales.mock');
 const productService = require('../../src/services/productService.service');
 const { validProductId, productIdRequired } = require('../../src/middlewares/productIdValidation');
 
@@ -57,8 +56,7 @@ describe('Teste das middlewares de venda', function () {
       };
       const res = {};
       const next = sinon.spy();
-
-      // Crie um stub para a função `findAll` do `productService` que retorna uma lista de produtos válidos
+  
       const findAllStub = sinon.stub(productService, 'findAll').resolves([
         { id: 1 },
         { id: 2 },
@@ -84,7 +82,6 @@ describe('Teste das middlewares de venda', function () {
       };
       const next = sinon.spy();
 
-      // Crie um stub para a função `findAll` do `productService` que retorna uma lista de produtos válidos
       const findAllStub = sinon.stub(productService, 'findAll').resolves([
         { id: 1 },
         { id: 2 },
